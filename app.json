@@ -12,6 +12,45 @@
         {
           "origin": "https://n"
         }
+      ],
+      [
+        "expo-font",
+        {
+          "fonts": ["./assets/fonts/Poppins-Regular.ttf"],
+          "android": {
+            "fonts": [
+              {
+                "fontFamily": "Poppins",
+                "fontDefinitions": [
+                  {
+                    "path": "./assets/fonts/Poppins-Regular.ttf",
+                    "weight": 400,
+                    "style": "normal"
+                  },
+                  {
+                    "path": "./assets/fonts/Poppins-ExtraBold.ttf",
+                    "weight": 800,
+                    "style": "normal"
+                  }
+                ]
+              }
+            ]
+          },
+          "ios": {
+            "fonts": [
+              "./assets/fonts/Poppins-Regular.ttf",
+              "./assets/fonts/Poppins-ExtraBold.ttf"
+            ]
+          }
+        }
+      ],
+      [
+        "expo-splash-screen",
+        {
+          "backgroundColor": "#232323",
+          "image": "./assets/images/splash-icon.png",
+          "imageWidth": 200
+        }
       ]
     ],
     "name": "rn-nativewind",

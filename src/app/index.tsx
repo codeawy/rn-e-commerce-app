@@ -18,6 +18,7 @@ export default function Page() {
           <Link href="/signup">Sign Up</Link>
           <Link href="/login">Login</Link>
           <Link href="/forget-password">Forget Password</Link>
+          <Link href="/verify-code">Verify Code</Link>
         </View>
       </SafeAreaView>
     </SafeAreaProvider>

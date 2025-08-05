@@ -16,6 +16,7 @@ import { ErrorMessage } from "@hookform/error-message";
 import { signupSchema, SignupFormData } from "../schema/auth";
 import { AntDesign, Feather, Ionicons } from "@expo/vector-icons";
 import Entypo from "@expo/vector-icons/Entypo";
+import ScreenHeader from "@/shared/Header";
 
 const Signup = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -51,18 +52,10 @@ const Signup = () => {
     <SafeAreaView className="flex-1 bg-white">
       <ScrollView className="flex-1" showsVerticalScrollIndicator={false}>
         <View className="px-6 py-8">
-          <View className="flex-row items-center gap-2">
-            <TouchableOpacity onPress={() => router.back()} className="py-2">
-              <Ionicons name="arrow-back" size={24} color="black" />
-            </TouchableOpacity>
-            <Text className="text-3xl font-poppins-medium">
-              Create an account
-            </Text>
-          </View>
-
-          <Text className="text-gray-500 font-poppins mb-8">
-            π Let's create your account.
-          </Text>
+          <ScreenHeader
+            title="Create an account"
+            description="Let's create your account."
+          />
 
           {/* Full Name Input */}
           <View className="mb-5">

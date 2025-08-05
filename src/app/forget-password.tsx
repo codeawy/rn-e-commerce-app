@@ -14,6 +14,7 @@ import { useForm, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { forgetPasswordSchema, ForgetPasswordFormData } from "../schema/auth";
 import { useState } from "react";
+import ScreenHeader from "@/shared/Header";
 
 const ForgetPassword = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -32,24 +33,19 @@ const ForgetPassword = () => {
 
   const onSubmit = (data: ForgetPasswordFormData) => {
     console.log(data);
+    setTimeout(() => {
+      router.push("/verify-code");
+    }, 1000);
   };
 
   return (
     <SafeAreaView className="flex-1 bg-white">
       <ScrollView className="flex-1" showsVerticalScrollIndicator={false}>
         <View className="px-4">
-          <View className="flex-col gap-2">
-            <TouchableOpacity onPress={() => router.back()} className="py-2">
-              <Ionicons name="arrow-back" size={24} color="black" />
-            </TouchableOpacity>
-            <Text className="text-3xl font-poppins-bold mb-2">
-              Forgot password
-            </Text>
-            <Text className="text-gray-500 font-poppins mb-8">
-              Enter your email for the verification process. We will send 4
-              digits code to your email.
-            </Text>
-          </View>
+          <ScreenHeader
+            title="Forgot password"
+            description="Enter your email for the verification process. We will send 4 digits code to your email."
+          />
           {/* Email Input */}
           <View className="mb-8">
             <Text className="font-poppins-medium mb-2 text-gray-700">

@@ -17,6 +17,7 @@ export default function Page() {
           <Text>Tailwind Text</Text>
           <Link href="/signup">Sign Up</Link>
           <Link href="/login">Login</Link>
+          <Link href="/forget-password">Forget Password</Link>
         </View>
       </SafeAreaView>
     </SafeAreaProvider>

@@ -4,5 +4,6 @@ export interface Product {
   id: string;
   name: string;
   price: number;
-  imageURL: ImageSourcePropType;
+  imageURL: ImageSourcePropType; // will be URL from API, but using local paths for now!
+  discountPercentage?: number;
 }

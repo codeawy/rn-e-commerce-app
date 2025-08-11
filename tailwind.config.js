@@ -9,7 +9,8 @@ module.exports = {
         primary: {
           DEFAULT: "#1A1A1A",
           200: "#CCCCCC",
-          300: "#B3B3B3"
+          300: "#B3B3B3",
+          500: "#808080"
         },
       },
       fontFamily: {

@@ -4,6 +4,7 @@ import { useFonts } from "expo-font";
 import { useEffect } from "react";
 import * as SplashScreen from "expo-splash-screen";
 import { Text } from "react-native";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
 import Splash from "./splash";
 import { SavedProductsProvider } from "@/context/SavedProductsContext";
 
@@ -28,8 +29,10 @@ export default function Layout() {
   }
 
   return (
-    <SavedProductsProvider>
-      <Slot />
-    </SavedProductsProvider>
+    <GestureHandlerRootView style={{ flex: 1 }}>
+      <SavedProductsProvider>
+        <Slot />
+      </SavedProductsProvider>
+    </GestureHandlerRootView>
   );
 }

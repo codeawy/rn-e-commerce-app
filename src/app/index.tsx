@@ -2,6 +2,7 @@ import Header from "@/shared/Header";
 import { Link } from "expo-router";
 import React, { useState } from "react";
 import {
+  Image,
   ScrollView,
   Text,
   TextInput,
@@ -12,6 +13,8 @@ import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { Category } from "@/interfaces/category";
 import { categories } from "@/data/category";
+import { products } from "@/data/products";
+import ProductCard from "@/components/ProductCard";
 
 export default function Page() {
   const [categoryList, setCategoryList] = useState<Category[]>(categories);
@@ -81,6 +84,13 @@ export default function Page() {
               </TouchableOpacity>
             ))}
           </ScrollView>
+
+          {/* Products List */}
+          <View className="mt-8 flex-row flex-wrap justify-between gap-4">
+            {products.map((product) => (
+              <ProductCard key={product.id} product={product} />
+            ))}
+          </View>
         </ScrollView>
       </SafeAreaView>
     </SafeAreaProvider>

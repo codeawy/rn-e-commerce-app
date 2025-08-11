@@ -5,6 +5,7 @@ import { useEffect } from "react";
 import * as SplashScreen from "expo-splash-screen";
 import { Text } from "react-native";
 import Splash from "./splash";
+import { SavedProductsProvider } from "@/context/SavedProductsContext";
 
 SplashScreen.preventAutoHideAsync();
 
@@ -26,5 +27,9 @@ export default function Layout() {
     return <Splash />;
   }
 
-  return <Slot />;
+  return (
+    <SavedProductsProvider>
+      <Slot />
+    </SavedProductsProvider>
+  );
 }

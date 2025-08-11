@@ -15,8 +15,12 @@ import { Category } from "@/interfaces/category";
 import { categories } from "@/data/category";
 import { products } from "@/data/products";
 import ProductCard from "@/components/ProductCard";
+import ProductCardSkeleton from "@/components/ProductCardSkeleton";
+import { useSavedProducts } from "@/context/SavedProductsContext";
 
 export default function Page() {
+  const { isLoadingSavedProducts } = useSavedProducts();
+
   const [categoryList, setCategoryList] = useState<Category[]>(categories);
 
   const handleCategoryPress = (id: string) => {
@@ -87,9 +91,15 @@ export default function Page() {
 
           {/* Products List */}
           <View className="mt-8 flex-row flex-wrap justify-between gap-4">
-            {products.map((product) => (
-              <ProductCard key={product.id} product={product} />
-            ))}
+            {isLoadingSavedProducts
+              ? // Show skeleton loaders while loading saved products
+                Array.from({ length: 6 }, (_, index) => (
+                  <ProductCardSkeleton key={`skeleton-${index}`} />
+                ))
+              : // Show actual products once loading is complete
+                products.map((product) => (
+                  <ProductCard key={product.id} product={product} />
+                ))}
           </View>
         </ScrollView>
       </SafeAreaView>

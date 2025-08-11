@@ -1,8 +1,10 @@
 import { Product } from "@/interfaces/product";
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { asyncStorageKeys } from "@/constants/storage";
 
 type SavedProductsContextType = {
+  isLoadingSavedProducts: boolean;
   toggleSavedProduct: (product: Product) => Promise<boolean>;
   isProductSaved: (productId: string) => boolean;
 };
@@ -16,12 +18,38 @@ export const SavedProductsProvider = ({
 }: {
   children: React.ReactNode;
 }) => {
+  const [isLoadingSavedProducts, setIsLoadingSavedProducts] =
+    useState<boolean>(true);
   const [savedProducts, setSavedProducts] = useState<Product[]>([]);
+
+  useEffect(() => {
+    loadSavedProducts();
+  }, []);
+
+  const loadSavedProducts = async () => {
+    try {
+      const savedProductsJson = await AsyncStorage.getItem(
+        asyncStorageKeys.savedProducts,
+      );
+
+      if (savedProductsJson) {
+        const parsedProducts = JSON.parse(savedProductsJson);
+        setSavedProducts(parsedProducts);
+      } else {
+        setSavedProducts([]);
+      }
+    } catch (error) {
+      console.error("Error while loading saved products:", error);
+      setSavedProducts([]);
+    } finally {
+      setIsLoadingSavedProducts(false);
+    }
+  };
 
   const persistSavedProduct = async (products: Product[]) => {
     try {
       const jsonValue = JSON.stringify(products);
-      await AsyncStorage.setItem("savedProducts", jsonValue);
+      await AsyncStorage.setItem(asyncStorageKeys.savedProducts, jsonValue);
       console.log("Saved products to storage", products.length);
     } catch (error) {
       console.error("Error while saving products:", error);
@@ -56,6 +84,7 @@ export const SavedProductsProvider = ({
   };
 
   const value = {
+    isLoadingSavedProducts,
     toggleSavedProduct,
     isProductSaved,
   };

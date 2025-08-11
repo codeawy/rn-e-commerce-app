@@ -36,7 +36,7 @@ const VerifyCode = () => {
 
   const onKeyPress = (
     event: NativeSyntheticEvent<TextInputKeyPressEventData>,
-    index: number
+    index: number,
   ) => {
     if (event.nativeEvent.key === "Backspace" && index > 0) {
       inputRefs.current[index - 1]?.focus();
@@ -67,7 +67,7 @@ const VerifyCode = () => {
               description="Enter the 4 digits code sent to your email."
             />
           </View>
-          <View className="flex-row gap-2 justify-center items-center">
+          <View className="flex-row items-center justify-center gap-2">
             {Array.from({ length: 4 }).map((_, index) => (
               <TextInput
                 ref={(el) => {
@@ -76,7 +76,7 @@ const VerifyCode = () => {
                   }
                 }}
                 key={index}
-                className="border border-gray-300 rounded-lg p-4 w-[72px] h-[72px] text-center text-2xl"
+                className="h-[72px] w-[72px] rounded-lg border border-gray-300 p-4 text-center text-2xl"
                 // TODO: Add a custom keyboard for the code input
                 keyboardType="number-pad"
                 maxLength={1}
@@ -87,8 +87,8 @@ const VerifyCode = () => {
             ))}
           </View>
           {/* Resend Code Link */}
-          <View className="flex-row justify-center mb-8 mt-4">
-            <Text className="text-gray-500 font-poppins text-lg">
+          <View className="mb-8 mt-4 flex-row justify-center">
+            <Text className="font-poppins text-lg text-gray-500">
               Email not received?{" "}
             </Text>
             <Pressable
@@ -96,7 +96,7 @@ const VerifyCode = () => {
                 router.push("/forget-password");
               }}
             >
-              <Text className="text-primary font-poppins underline text-lg font-bold">
+              <Text className="font-poppins text-lg font-bold text-primary underline">
                 Resend code
               </Text>
             </Pressable>
@@ -104,13 +104,13 @@ const VerifyCode = () => {
 
           {/* Continue Button */}
           <TouchableOpacity
-            className={`rounded-lg py-4 items-center mt-auto ${
+            className={`mt-auto items-center rounded-lg py-4 ${
               isCodeComplete ? "bg-primary" : "bg-primary-200"
             }`}
             onPress={handleSubmit}
             disabled={!isCodeComplete || isSubmitting}
           >
-            <Text className="text-white font-poppins-bold text-lg">
+            <Text className="font-poppins-bold text-lg text-white">
               Continue
             </Text>
           </TouchableOpacity>

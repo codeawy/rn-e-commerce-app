@@ -4,7 +4,6 @@ import {
   SafeAreaView,
   StyleSheet,
   Text,
-  Image,
   TextInput,
   TouchableOpacity,
   View,
@@ -61,9 +60,9 @@ const ForgetPassword = () => {
                       errors.email
                         ? "border-red-500"
                         : value
-                        ? "border-green-500"
-                        : "border-gray-300"
-                    } rounded-lg p-4 font-poppins pr-10`}
+                          ? "border-green-500"
+                          : "border-gray-300"
+                    } font-poppins rounded-lg p-4 pr-10`}
                     placeholder="Enter your email address"
                     keyboardType="email-address"
                     autoCapitalize="none"
@@ -83,7 +82,7 @@ const ForgetPassword = () => {
               )}
             />
             {errors.email && (
-              <Text className="text-red-500 font-poppins mt-1">
+              <Text className="font-poppins mt-1 text-red-500">
                 {errors.email.message}
               </Text>
             )}
@@ -91,13 +90,13 @@ const ForgetPassword = () => {
 
           {/* Send Code Button */}
           <TouchableOpacity
-            className={`rounded-lg py-4 items-center mb-6 ${
+            className={`mb-6 items-center rounded-lg py-4 ${
               isValid ? "bg-primary" : "bg-primary-200"
             }`}
             onPress={handleSubmit(onSubmit)}
             disabled={isSubmitting || !isValid}
           >
-            <Text className="text-white font-poppins-bold text-lg">
+            <Text className="font-poppins-bold text-lg text-white">
               Send Code
             </Text>
           </TouchableOpacity>

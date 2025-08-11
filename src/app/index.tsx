@@ -1,6 +1,6 @@
 import Header from "@/shared/Header";
 import { Link } from "expo-router";
-import React from "react";
+import React, { useState } from "react";
 import {
   ScrollView,
   Text,
@@ -10,8 +10,21 @@ import {
 } from "react-native";
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
 import Ionicons from "@expo/vector-icons/Ionicons";
+import { Category } from "@/interfaces/category";
+import { categories } from "@/data/category";
 
 export default function Page() {
+  const [categoryList, setCategoryList] = useState<Category[]>(categories);
+
+  const handleCategoryPress = (id: string) => {
+    setCategoryList(
+      categoryList.map((category) => ({
+        ...category,
+        active: category.id === id,
+      })),
+    );
+  };
+
   return (
     <SafeAreaProvider>
       <SafeAreaView>
@@ -45,6 +58,29 @@ export default function Page() {
               <Ionicons name="filter-outline" size={24} color="white" />
             </TouchableOpacity>
           </View>
+
+          {/* Category List */}
+          <ScrollView
+            horizontal
+            className="flex-row flex-wrap gap-2"
+            showsHorizontalScrollIndicator={false}
+          >
+            {categoryList.map((category) => (
+              <TouchableOpacity
+                key={category.id}
+                className={`mr-2 rounded-lg px-4 py-2 ${
+                  category.active ? "bg-black" : "bg-gray-100"
+                }`}
+                onPress={() => handleCategoryPress(category.id)}
+              >
+                <Text
+                  className={`${category.active ? "text-white" : "text-black"}`}
+                >
+                  {category.name}
+                </Text>
+              </TouchableOpacity>
+            ))}
+          </ScrollView>
         </ScrollView>
       </SafeAreaView>
     </SafeAreaProvider>
